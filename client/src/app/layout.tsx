@@ -12,9 +12,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='en'>
-      <body className={`${inter.className} flex flex-col items-center w-full justify-center`}>
+      <body className={`${inter.className} flex flex-col  w-full justify-center`}>
         <Header />
-        <div>{children}</div>
+        <div className='w-full'>{children}</div>
       </body>
     </html>
   )

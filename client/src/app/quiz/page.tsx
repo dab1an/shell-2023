@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link'
 import React from 'react'
+import TheButton from '../_components/TheButton'
 const page = () => {
   return (
     <div className='pt-44 flex flex-col items-center gap-4'>
@@ -11,9 +12,7 @@ const page = () => {
         seconds.
       </p>
       <Link href='/quiz/question1'>
-        <button className=' bg-gradient-to-r from-[#68b76a] to-[#30DF36] hover:from-[#499e4c] hover:to-[#22bf27] text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-all duration-500 ease-in-out hover:scale-110 hover:brightness-110 hover:animate-pulse active:animate-bounce'>
-          Start Quiz
-        </button>
+        <TheButton>Start Quiz</TheButton>
       </Link>
     </div>
   )

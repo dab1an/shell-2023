@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
+import TheButton from '@/app/_components/TheButton'
 import Link from 'next/link'
 import React from 'react'
 type QuizData = {
@@ -77,27 +78,39 @@ const Page = ({ params }: any) => {
   }
   const data = quizData[params.question]
   return (
-    <div className='flex flex-col items-center'>
-      <p className='text-neutral-400'>Question {data.number}</p>
-      <div className='flex items-center'>
-        <h1 className='text-2xl text-center'>{data.question}</h1>
-        <img src={data.image} alt='' className='w-80 max-h-64' />
-      </div>
-      <div className='grid grid-cols-2 gap-4 w-8/12 justify-evenly mt-14 grid-rows-2'>
-        {data.choices.map((choice, index) => {
-          return (
-            <div key={index} className='flex bg-white border-2 border-neutral-900 w-56 rounded p-2 gap-2 h-12 items-center'>
-              <p className='bg-[#30DF36] rounded-full w-6 h-6 flex justify-center items-center'>{index + 1}</p>
-              <p>{choice}</p>
+    <div className='flex flex-col items-center width-full '>
+      <div className='w-10/12 flex flex-col items-center'>
+        {params.question === 'result' ? (
+          <h1>RESULTS</h1>
+        ) : (
+          <>
+            <p className='text-neutral-400'>Question {data.number}</p>
+            <div className='flex items-center'>
+              <h1 className='text-2xl text-center'>{data.question}</h1>
+              <img src={data.image} alt='' className='w-80 max-h-64' />
             </div>
-          )
-        })}
+            <div className='grid grid-cols-4 justify-evenly mt-14 gap-4'>
+              {data.choices.map((choice, index) => {
+                return (
+                  <div key={index} className='flex bg-white border-2 border-neutral-900 w-56 rounded p-2 gap-2 h-12 items-center'>
+                    <p className='bg-[#30DF36] rounded-full w-6 h-6 flex justify-center items-center'>{index + 1}</p>
+                    <p>{choice}</p>
+                  </div>
+                )
+              })}
+            </div>
+            {data.number === 10 ? (
+              <Link href={`/quiz/result`} className='mt-14'>
+                <TheButton>Submit Quiz</TheButton>
+              </Link>
+            ) : (
+              <Link href={`/quiz/question${data.number + 1}`} className='mt-10'>
+                <TheButton>Next Question</TheButton>
+              </Link>
+            )}
+          </>
+        )}
       </div>
-      <Link href={`/quiz/question${data.number + 1}`}>
-        <button className='mt-14 bg-gradient-to-r from-[#68b76a] to-[#30DF36] hover:from-[#499e4c] hover:to-[#22bf27] text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-all duration-500 ease-in-out hover:scale-110 hover:brightness-110 hover:animate-pulse active:animate-bounce'>
-          Next Question
-        </button>
-      </Link>
     </div>
   )
 }
