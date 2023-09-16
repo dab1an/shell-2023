@@ -6,6 +6,7 @@ interface resultCardProps {
   description: string;
   main: boolean;
 }
+
 const ResultCard = (props: resultCardProps) => {
   return (
     <div
