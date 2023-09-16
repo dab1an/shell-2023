@@ -14,26 +14,28 @@ const Page = ({ params }: any) => {
   const quizData: QuizData = {
     question1: {
       number: 1,
-      question: 'What is your credit score range?',
-      choices: ['Excellent (above 750)', 'Good (700-749)', 'Fair (650-699)', 'Poor (below 650)'],
+      question: 'Are you currently a student?',
+      choices: ['Yes', 'No'],
       image: '/undraw1.svg',
     },
+
     question2: {
       number: 2,
       question: 'What is your main reason for getting a credit card?',
       choices: ['Building credit', 'Earning rewards', 'Emergency expenses', 'Travel benefits'],
       image: '/undraw2.svg',
     },
+
     question3: {
       number: 3,
-      question: 'How often do you plan to use the credit card for purchases?',
-      choices: ['Daily', 'Weekly', 'Monthly', 'Rarely'],
+      question: 'What is your credit score range?',
+      choices: ['Excellent (above 750)', 'Good (700-749)', 'Fair (650-699)', 'Poor (below 650)'],
       image: '/undraw3.svg',
     },
     question4: {
       number: 4,
-      question: 'Do you plan to carry a balance on your credit card month-to-month?',
-      choices: ['Yes, often', 'Occasionally', 'No, I pay in full each month'],
+      question: 'How often do you plan to use the credit card for purchases?',
+      choices: ['Daily', 'Weekly', 'Monthly', 'Rarely'],
       image: '/undraw4.svg',
     },
     question5: {
@@ -62,9 +64,15 @@ const Page = ({ params }: any) => {
     },
     question9: {
       number: 9,
-      question: 'What is your estimated monthly income?',
-      choices: ['Less than $1,000', '$1,000 - $2,500', '$2,500 - $5,000', 'More than $5,000'],
+      question: 'Have you had any credit card debt in the past?',
+      choices: ['Yes', 'No'],
       image: '/undraw9.svg',
+    },
+    question10: {
+      number: 10,
+      question: 'Do you have a bank preference',
+      choices: ['Chase', 'Wells Fargo', 'TD Bank', 'Bank of America', 'Capital One', 'American Express', 'Discover', 'Citi Bank', 'No preference'],
+      image: '/undraw10.svg',
     },
   }
   const data = quizData[params.question]
@@ -75,7 +83,7 @@ const Page = ({ params }: any) => {
         <h1 className='text-2xl text-center'>{data.question}</h1>
         <img src={data.image} alt='' className='w-80 max-h-64' />
       </div>
-      <div className='grid grid-cols-2 gap-4 w-8/12 justify-evenly mt-14'>
+      <div className='grid grid-cols-2 gap-4 w-8/12 justify-evenly mt-14 grid-rows-2'>
         {data.choices.map((choice, index) => {
           return (
             <div key={index} className='flex bg-white border-2 border-neutral-900 w-56 rounded p-2 gap-2 h-12 items-center'>
