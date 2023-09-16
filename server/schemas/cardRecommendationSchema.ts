@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const cardRecommendationBody = z.object({
-  isStudent: z.boolean(),
+  isStudent: z.string(),
   interestedInCashback: z.string(),
   creditScore: z.string(),
   creditReason: z.string(),
