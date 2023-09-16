@@ -3,7 +3,7 @@ import { z } from "zod";
 import { ChatOpenAI } from "langchain/chat_models/openai";
 import { PromptTemplate } from "langchain/prompts";
 import { JsonOutputFunctionsParser } from "langchain/output_parsers";
-import { CardRecommendationBody } from "../client/src/schemas/cardRecommendationSchema";
+import { CardRecommendationBody } from "./../../schemas/cardRecommendationSchema";
 
 const TEMPLATE = `Your job is to recommend 3 credit cards to users based on their responses to a questionnaire. 
 
