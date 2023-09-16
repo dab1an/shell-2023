@@ -89,7 +89,7 @@ const Page = ({ params }: any) => {
               <h1 className='text-2xl text-center'>{data.question}</h1>
               <img src={data.image} alt='' className='w-80 max-h-64' />
             </div>
-            <div className='grid grid-cols-4 justify-evenly mt-14 gap-4'>
+            <div className='grid grid-cols-4 justify-evenly mt-14 gap-4 flex-wrap' style={{ flexWrap: 'wrap' }}>
               {data.choices.map((choice, index) => {
                 return (
                   <div key={index} className='flex bg-white border-2 border-neutral-900 w-56 rounded p-2 gap-2 h-12 items-center'>
