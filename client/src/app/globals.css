@@ -43,4 +43,5 @@ html {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
   grid-gap: 1rem;
+  place-content: center;
 }

@@ -9,8 +9,16 @@ type QuizData = {
   choices: string[]
   image?: string
 }
+type IProfileData = {
+  isStudent: string
+  interestedInCashback: string
+  creditScore: string
+  creditReason: string
+  preferredBanks: string
+}
 const Page = ({ params }: any) => {
   const [currentQuestion, setCurrentQuestion] = useState(0)
+  const [highlightedChoices, setHighlightedChoices] = useState<number[]>([])
   const quizData: QuizData[] = [
     {
       number: 1,
@@ -75,7 +83,32 @@ const Page = ({ params }: any) => {
       image: '/undraw10.svg',
     },
   ]
+  const [profileData, setProfileData] = useState<IProfileData>({
+    isStudent: 'false',
+    interestedInCashback: 'false',
+    creditScore: '650',
+    creditReason: 'travel',
+    preferredBanks: 'Chase',
+  })
   const data = quizData[params.question]
+  const handleNextQuestion = () => {
+    setCurrentQuestion(prev => prev + 1)
+    if (currentQuestion + 1 === 1) {
+      const cur = quizData[currentQuestion].choices[highlightedChoices[0]]
+      // setProfileData(prev => [...prev, isStudent: cur]);
+    }
+    setHighlightedChoices([])
+  }
+  const handleHighlightQuestion = (index: number) => {
+    if (index === 9) {
+      setHighlightedChoices(prev => [...prev, index])
+    } else {
+      setHighlightedChoices(prev => [index])
+    }
+  }
+  const isHighlighted = (index: number) => {
+    return highlightedChoices.includes(index)
+  }
   return (
     <div className='flex flex-col items-center width-full '>
       <div className='w-10/12 flex flex-col items-center'>
@@ -88,12 +121,17 @@ const Page = ({ params }: any) => {
               <h1 className='text-2xl text-center'>{quizData[currentQuestion].question}</h1>
               <img src={quizData[currentQuestion].image} alt='' className='w-80 max-h-64' />
             </div>
-            <div className='gridChoices mt-14'>
+            <div className='flex flex-wrap mt-14 gap-2 justify-center'>
               {quizData[currentQuestion].choices.map((choice, index) => {
                 return (
-                  <div key={index} className='flex bg-white border-2 border-neutral-900 w-full rounded p-2 gap-2 h-12 items-center'>
-                    <p className='bg-[#30DF36] rounded-full w-6 h-6 flex justify-center items-center'>{index + 1}</p>
-                    <p>{choice}</p>
+                  <div
+                    key={index}
+                    onClick={() => handleHighlightQuestion(index)}
+                    className={`flex ${
+                      isHighlighted(index) ? 'bg-[#ceffd0]' : 'bg-[#fff]'
+                    } border-2 border-neutral-700 rounded p-2 gap-2 h-12 w-56 items-center justify-center cursor-pointer transition-colors duration-500`}
+                  >
+                    <p className='font-bold'>{choice}</p>
                   </div>
                 )
               })}
