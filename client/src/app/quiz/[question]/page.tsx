@@ -92,18 +92,42 @@ const Page = ({ params }: any) => {
   })
   const data = quizData[params.question]
   const handleNextQuestion = () => {
-    setCurrentQuestion(prev => prev + 1)
+    const cur = quizData[currentQuestion].choices[highlightedChoices[0]]
+
     if (currentQuestion + 1 === 1) {
-      const cur = quizData[currentQuestion].choices[highlightedChoices[0]]
-      // setProfileData(prev => [...prev, isStudent: cur]);
+      setProfileData(prev => ({ ...prev, isStudent: cur }))
     }
+    if (currentQuestion + 1 === 5) {
+      setProfileData(prev => ({ ...prev, interestedInCashback: cur }))
+    }
+    if (currentQuestion + 1 === 3) {
+      let newCur = ''
+      if (highlightedChoices[0] === 0) newCur = '750'
+      if (highlightedChoices[0] === 1) newCur = '725'
+      if (highlightedChoices[0] === 2) newCur = '675'
+      if (highlightedChoices[0] === 3) newCur = '625'
+      setProfileData(prev => ({ ...prev, creditScore: newCur }))
+    }
+    if (currentQuestion + 1 === 2) {
+      setProfileData(prev => ({ ...prev, creditReason: cur }))
+    }
+    if (currentQuestion + 1 === 10) {
+      let banks = ''
+      for (let i = 0; i < highlightedChoices.length; i++) {
+        let curBank = quizData[currentQuestion].choices[highlightedChoices[i]]
+        banks.concat(curBank + ',')
+      }
+      banks = banks.substring(0, -2)
+      setProfileData(prev => ({ ...prev, preferredBanks: banks }))
+    }
+    setCurrentQuestion(prev => prev + 1)
     setHighlightedChoices([])
   }
-  const handleHighlightQuestion = (index: number) => {
-    if (index === 9) {
+  const handleHighlightQuestion = (index: number, currentQuestion: number) => {
+    if (currentQuestion === 9) {
       setHighlightedChoices(prev => [...prev, index])
     } else {
-      setHighlightedChoices(prev => [index])
+      setHighlightedChoices([index])
     }
   }
   const isHighlighted = (index: number) => {
@@ -126,7 +150,7 @@ const Page = ({ params }: any) => {
                 return (
                   <div
                     key={index}
-                    onClick={() => handleHighlightQuestion(index)}
+                    onClick={() => handleHighlightQuestion(index, currentQuestion)}
                     className={`flex ${
                       isHighlighted(index) ? 'bg-[#ceffd0]' : 'bg-[#fff]'
                     } border-2 border-neutral-700 rounded p-2 gap-2 h-12 w-56 items-center justify-center cursor-pointer transition-colors duration-500`}
@@ -141,7 +165,7 @@ const Page = ({ params }: any) => {
                 <TheButton>Submit Quiz</TheButton>
               </Link>
             ) : (
-              <div className='mt-10' onClick={() => setCurrentQuestion(prev => prev + 1)}>
+              <div className='mt-10' onClick={() => handleNextQuestion()}>
                 <TheButton>Next Question</TheButton>
               </div>
             )}
