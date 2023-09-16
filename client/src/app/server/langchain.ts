@@ -3,9 +3,9 @@ import { z } from "zod";
 import { ChatOpenAI } from "langchain/chat_models/openai";
 import { PromptTemplate } from "langchain/prompts";
 import { JsonOutputFunctionsParser } from "langchain/output_parsers";
-import { CardRecommendationBody } from "./schemas/cardRecommendationSchema";
+import { CardRecommendationBody } from "../client/src/schemas/cardRecommendationSchema";
 
-const PROMPT = `Your job is to recommend 3 credit cards to users based on their responses to a questionnaire. 
+const TEMPLATE = `Your job is to recommend 3 credit cards to users based on their responses to a questionnaire. 
 
 User is a student: {isStudent}
 User credit score: {creditScore}
@@ -58,11 +58,9 @@ const functionCallingModel = model.bind({
   function_call: { name: "output_formatter" },
 });
 
-const prompt = PromptTemplate.fromTemplate(PROMPT);
+const prompt = PromptTemplate.fromTemplate(TEMPLATE);
 
-export const getCreditCardRecommendations = async (
-  params: CardRecommendationBody
-) => {
+export const getCardRecommendation = async (params: CardRecommendationBody) => {
   const chain = prompt
     .pipe(functionCallingModel)
     .pipe(new JsonOutputFunctionsParser());
