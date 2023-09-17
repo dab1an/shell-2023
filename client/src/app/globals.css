@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-  background-color: #fffff0;
+  background-color: #e5e4e4;
 }
 
 .buttonTB {
@@ -491,4 +491,69 @@ Card
   to {
     transform: rotate(-1turn);
   }
+
+.card {
+  margin-left: 20px;
+  margin-top: 20px;
+  font-family: "Candara", sans-serif;
+  width: 220px;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  object-fit: cover;
+}
+
+.profile-image img {
+  z-index: 1;
+  width: 120px;
+  height: 120px;
+  position: relative;
+  margin-top: -75px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 100px;
+  border: 6px solid white;
+}
+
+.card-content h3 {
+  font-size: 23px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+}
+
+.card-content p {
+  font-size: 14px;
+  text-align: center;
+  padding: 0px 20px 10px 20px;
+}
+
+.icon {
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 30px;
+}
+
+.icon a {
+  text-decoration: none;
+  font-size: 40px;
+  padding: 0 15px;
+  transition-duration: 0.4s;
+  transition-property: transform;
+}
+
+.icon a:hover {
+  color: #d95d39;
+  transform: scale(1.15);
 }
