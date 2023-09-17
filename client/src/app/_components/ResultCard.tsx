@@ -31,7 +31,7 @@ const ResultCard = (props: resultCardProps) => {
         <h5 className="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased min-h-[60px]">
           {props.dataName}
         </h5>
-        <p className="block overflow-auto font-sans font-light h-[250px] leading-relaxed text-inherit antialiased text-sm">
+        <p className="block overflow-auto font-sans font-light h-[170px] leading-relaxed text-inherit antialiased text-sm">
           {props.dataDesc}
         </p>
       </div>
