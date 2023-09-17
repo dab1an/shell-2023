@@ -117,18 +117,24 @@ const Page = ({ params }: any) => {
       let banks = ''
       for (let i = 0; i < highlightedChoices.length; i++) {
         let curBank = quizData[currentQuestion].choices[highlightedChoices[i]]
-        banks.concat(curBank + ',')
+        console.log(curBank)
+        banks += curBank + ','
       }
-      banks = banks.substring(0, -2)
       setProfileData(prev => ({ ...prev, preferredBanks: banks }))
+      console.log(profileData)
+      console.log(banks)
     }
     setCurrentQuestion(prev => prev + 1)
     setHighlightedChoices([])
   }
   const handleHighlightQuestion = (index: number, currentQuestion: number) => {
     if (currentQuestion === 9) {
-      setHighlightedChoices(prev => [...prev, index])
-      setProfileData(prev => ({ ...prev, preferredBanks: highlightedChoices.join(',') }))
+      if (highlightedChoices.includes(index)) {
+        const newArray = highlightedChoices.filter(element => element !== index)
+        setHighlightedChoices(newArray)
+      } else {
+        setHighlightedChoices(prev => [...prev, index])
+      }
     } else {
       setHighlightedChoices([index])
     }
@@ -139,7 +145,7 @@ const Page = ({ params }: any) => {
   return (
     <div className='flex flex-col items-center width-full '>
       <div className='w-10/12 flex flex-col items-center'>
-        {params.question === 'result' ? (
+        {currentQuestion === 10 ? (
           <Results />
         ) : (
           <>
@@ -164,9 +170,9 @@ const Page = ({ params }: any) => {
               })}
             </div>
             {currentQuestion + 1 === 10 ? (
-              <Link href={`/quiz/result`} className='mt-14'>
+              <div className='mt-10' onClick={() => handleNextQuestion()}>
                 <TheButton>Submit Quiz</TheButton>
-              </Link>
+              </div>
             ) : (
               <div className='mt-10' onClick={() => handleNextQuestion()}>
                 <TheButton>Next Question</TheButton>
