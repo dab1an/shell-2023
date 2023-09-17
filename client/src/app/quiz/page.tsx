@@ -11,7 +11,7 @@ const page = () => {
         Welcome to APPNAME, where finding the perfect credit card is effortless. Take our quick quiz, to match your financial needs and goals in
         seconds.
       </p>
-      <Link href='/quiz/question1'>
+      <Link href='/quiz/questions'>
         <TheButton>Start Quiz</TheButton>
       </Link>
     </div>
