@@ -208,13 +208,9 @@ const Page = ({ params }: any) => {
               })}
             </div>
             {currentQuestion + 1 === 10 ? (
-              <Link
-                href={`/quiz/result`}
-                className="mt-14"
-                onClick={() => getCards(profileData)}
-              >
+              <div className="mt-14" onClick={() => getCards(profileData)}>
                 <TheButton>Submit Quiz</TheButton>
-              </Link>
+              </div>
             ) : (
               <div className="mt-10" onClick={() => handleNextQuestion()}>
                 <TheButton>Next Question</TheButton>
