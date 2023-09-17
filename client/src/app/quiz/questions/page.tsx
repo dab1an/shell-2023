@@ -1,11 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-"use client";
-import Results from "@/app/_components/Results";
-import TheButton from "@/app/_components/TheButton";
-import ProgressBar from "@ramonak/react-progress-bar";
-import Link from "next/link";
-import { Line } from "rc-progress";
-import React, { useState } from "react";
+'use client'
+import Results from '@/app/_components/Results'
+import TheButton from '@/app/_components/TheButton'
+import Link from 'next/link'
+import React, { useState } from 'react'
+
 type QuizData = {
   number: number;
   question: string;
@@ -20,6 +19,16 @@ type IProfileData = {
   preferredBanks: string;
 };
 const Page = ({ params }: any) => {
+
+  const [globalData, setGlobalData] = useState()
+  const [isLoading, setIsLoading] = useState(false)
+  async function getCards(profileData: IProfileData) {
+    setIsLoading(true)
+    console.log(profileData)
+    console.log(JSON.stringify(profileData))
+    const res = await fetch('/api', {
+      method: 'POST',
+
   const [globalData, setGlobalData] = useState();
 
   async function getCards(profileData: IProfileData) {
@@ -35,9 +44,12 @@ const Page = ({ params }: any) => {
       },
     });
 
-    const data = await res.json();
-    setGlobalData(data);
-    console.log(data);
+
+    const data = await res.json()
+    setGlobalData(data)
+    console.log(data)
+    setIsLoading(false)
+
   }
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [highlightedChoices, setHighlightedChoices] = useState<number[]>([]);
@@ -154,10 +166,8 @@ const Page = ({ params }: any) => {
       setProfileData((prev) => ({ ...prev, creditReason: cur }));
     }
     if (currentQuestion + 1 === 10) {
-      let banksString = highlightedChoices
-        .map((i) => quizData[currentQuestion].choices[i])
-        .join(",");
-      console.log(banksString);
+
+      let banksString = highlightedChoices.map(i => quizData[currentQuestion].choices[i]).join(',')
 
       setProfileData((prev) => {
         const updatedProfileData = { ...prev, preferredBanks: banksString };
@@ -189,44 +199,32 @@ const Page = ({ params }: any) => {
     return highlightedChoices.includes(index);
   };
   return (
-    <div className="flex flex-col items-center width-full ">
-      <div className="w-10/12 flex flex-col items-center">
-        {currentQuestion === 10 ? (
-          <Results data={globalData} />
-        ) : (
-          <>
-            <ProgressBar completed={(currentQuestion + 1) / 10} />
-            <Line
-              percent={(currentQuestion + 1) / 10}
-              strokeWidth={4}
-              strokeColor="#D3D3D3"
-            />
-            <div className="flex items-center">
-              <h1 className="text-2xl text-center">
-                {quizData[currentQuestion].question}
-              </h1>
-              <img
-                src={quizData[currentQuestion].image}
-                alt=""
-                className="w-80 max-h-64"
-              />
-            </div>
-            <div className="flex flex-wrap mt-14 gap-2 justify-center">
-              {quizData[currentQuestion].choices.map((choice, index) => {
-                return (
-                  <div
-                    key={index}
-                    onClick={() =>
-                      handleHighlightQuestion(index, currentQuestion)
-                    }
-                    className={`flex ${
-                      isHighlighted(index) ? "bg-[#ceffd0]" : "bg-[#fff]"
-                    } border-2 border-neutral-700 rounded p-2 gap-2 h-12 w-56 items-center justify-center cursor-pointer transition-colors duration-500`}
-                  >
-                    <p className="font-bold">{choice}</p>
-                  </div>
-                );
-              })}
+
+    <div className='flex flex-col items-center width-full '>
+      {isLoading ? (
+        <div className='w-10/12 flex flex-col items-center'>
+          {currentQuestion === 10 ? (
+            <Results data={globalData} />
+          ) : (
+            <>
+              <div className='flex items-center mt-8'>
+                <h1 className='text-2xl text-center'>{quizData[currentQuestion].question}</h1>
+                <img src={quizData[currentQuestion].image} alt='' className='w-80 max-h-64' />
+              </div>
+              <div className='flex flex-wrap mt-14 gap-2 justify-center'>
+                {quizData[currentQuestion].choices.map((choice, index) => {
+                  return (
+                    <div
+                      key={index}
+                      onClick={() => handleHighlightQuestion(index, currentQuestion)}
+                      className={`flex ${
+                        isHighlighted(index) ? 'bg-[#ceffd0]' : 'bg-[#fff]'
+                      } border-2 border-neutral-700 rounded p-2 gap-2 h-12 w-56 items-center justify-center cursor-pointer transition-colors duration-500`}
+                    >
+                      <p className='font-bold'>{choice}</p>
+                    </div>
+                  )
+                })}
             </div>
             {currentQuestion + 1 === 10 ? (
               <div
@@ -242,10 +240,45 @@ const Page = ({ params }: any) => {
               <div className="mt-10" onClick={() => handleNextQuestion()}>
                 <TheButton>Next Question</TheButton>
               </div>
-            )}
-          </>
-        )}
-      </div>
+              {currentQuestion + 1 === 10 ? (
+                <div
+                  className='mt-14'
+                  onClick={() => {
+                    handleNextQuestion()
+                    getCards(profileData)
+                  }}
+                >
+                  <TheButton>Submit Quiz</TheButton>
+                </div>
+              ) : (
+                <div className='mt-10' onClick={() => handleNextQuestion()}>
+                  <TheButton>Next Question</TheButton>
+                </div>
+              )}
+            </>
+          )}
+        </div>
+      ) : (
+        <div aria-label='Orange and tan hamster running in a metal wheel' role='img' className='wheel-and-hamster mt-36 relative'>
+          <div className='wheel'></div>
+          <div className='hamster'>
+            <div className='hamster__body'>
+              <div className='hamster__head'>
+                <div className='hamster__ear'></div>
+                <div className='hamster__eye'></div>
+                <div className='hamster__nose'></div>
+              </div>
+              <div className='hamster__limb hamster__limb--fr'></div>
+              <div className='hamster__limb hamster__limb--fl'></div>
+              <div className='hamster__limb hamster__limb--br'></div>
+              <div className='hamster__limb hamster__limb--bl'></div>
+              <div className='hamster__tail'></div>
+            </div>
+          </div>
+          <div className='spoke'></div>
+          <p className='absolute -bottom-14 text-center text-lg font-bold'>CardWise is Working Hard!</p>
+        </div>
+      )}
     </div>
   );
 };
