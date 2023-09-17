@@ -1,8 +1,8 @@
-'use client'
-import Image from 'next/image'
-import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
-import { HiMenu } from 'react-icons/hi'
+"use client";
+import Image from "next/image";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
+import { HiMenu } from "react-icons/hi";
 const Header = () => {
   return (
     <div className=' py-5 top-5 bg-[#7ad87d]  px-5 flex w-full justify-between  items-center z-10 backdrop-filter backdrop-blur bg-opacity-80'>
@@ -14,7 +14,6 @@ const Header = () => {
         <button>Button</button>
         <button>Button</button>
       </div>
-
       <div>
 
         <ul className='flex space-x-16'>
@@ -28,11 +27,10 @@ const Header = () => {
             </div>
           </li>
         </ul>
-
       </div>
       
     </div>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
