@@ -4,7 +4,6 @@ import Results from '@/app/_components/Results'
 import TheButton from '@/app/_components/TheButton'
 import Link from 'next/link'
 import React, { useState } from 'react'
-
 type QuizData = {
   number: number
   question: string
@@ -21,18 +20,14 @@ type IProfileData = {
 const Page = ({ params }: any) => {
   const [globalData, setGlobalData] = useState()
   const [isLoading, setIsLoading] = useState(false)
-
   async function getCards(profileData: IProfileData) {
+    setIsLoading(true)
     console.log(profileData)
     console.log(JSON.stringify(profileData))
     const res = await fetch('/api', {
       method: 'POST',
       body: JSON.stringify(profileData),
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: '*/*',
-        'Access-Control-Allow-Origin': '*',
-      },
+      headers: { 'Content-Type': 'application/json', Accept: '*/*', 'Access-Control-Allow-Origin': '*' },
     })
 
     const data = await res.json()
@@ -173,7 +168,7 @@ const Page = ({ params }: any) => {
           {currentQuestion === 10 ? (
             <Results data={globalData} />
           ) : (
-            <div>
+            <>
               <div className='flex items-center mt-8'>
                 <h1 className='text-2xl text-center'>{quizData[currentQuestion].question}</h1>
                 <img src={quizData[currentQuestion].image} alt='' className='w-80 max-h-64' />
@@ -204,19 +199,11 @@ const Page = ({ params }: any) => {
                   <TheButton>Submit Quiz</TheButton>
                 </div>
               ) : (
-                <>
-                  {currentQuestion + 1 === 10 ? (
-                    <div className='mt-10' onClick={() => handleNextQuestion()}>
-                      <TheButton>Next Question</TheButton>
-                    </div>
-                  ) : (
-                    <div className='mt-10' onClick={() => handleNextQuestion()}>
-                      <TheButton>Next Question</TheButton>
-                    </div>
-                  )}
-                </>
+                <div className='mt-10' onClick={() => handleNextQuestion()}>
+                  <TheButton>Next Question</TheButton>
+                </div>
               )}
-            </div>
+            </>
           )}
         </div>
       ) : (
@@ -243,4 +230,5 @@ const Page = ({ params }: any) => {
     </div>
   )
 }
+
 export default Page
