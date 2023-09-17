@@ -110,6 +110,10 @@ const Page = ({ params }: any) => {
   })
 
   const handleNextQuestion = () => {
+    if (highlightedChoices.length === 0) {
+      alert('Please select an answer before continuing')
+      return
+    }
     const cur = quizData[currentQuestion].choices[highlightedChoices[0]]
 
     if (currentQuestion + 1 === 1) {
