@@ -5,7 +5,7 @@ import { PromptTemplate } from "langchain/prompts";
 import { JsonOutputFunctionsParser } from "langchain/output_parsers";
 import { CardRecommendationBody } from "../schemas/cardRecommendationSchema";
 
-const TEMPLATE = `Your job is to recommend 3 credit cards to users based on their responses to a questionnaire. 
+const TEMPLATE = `Your job is to recommend 3 credit cards to users based on their responses to a questionnaire. It is extremely important that you pay close attention to the reason the person is trying to get the credit card and their credit score, as a poor credit score could mean they need a card that is meant for rebuilding credit. It is essential that you abide by at least one of the users bank preferences. Make it so that the 3 credit cards are from different banks. In the description, write about the benefits the card provides as well as why that card is a good fit for the user.
 
 User is a student: {isStudent}
 User credit score: {creditScore}
