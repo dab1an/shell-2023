@@ -16,7 +16,6 @@ const page = () => {
                 key={i}
                 dataName={e.name}
                 dataDesc={e.dsc}
-                cardImg={e.url}
                 main={false}
               />
             );
