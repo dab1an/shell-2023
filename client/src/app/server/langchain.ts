@@ -14,7 +14,6 @@ Reason user is looking to get a credit card: {creditReason}
 User preferred banks: {preferredBanks}`
 
 const model = new ChatOpenAI({
-  openAIApiKey: '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',
   temperature: 0.8,
   modelName: 'gpt-3.5-turbo',
 })

@@ -163,7 +163,7 @@ const Page = ({ params }: any) => {
   }
   return (
     <div className='flex flex-col items-center width-full '>
-      {!isLoading ? (
+      {isLoading ? (
         <div className='w-10/12 flex flex-col items-center'>
           {currentQuestion === 10 ? (
             <Results data={globalData} />
@@ -207,7 +207,25 @@ const Page = ({ params }: any) => {
           )}
         </div>
       ) : (
-        <div className='loader'></div>
+        <div aria-label='Orange and tan hamster running in a metal wheel' role='img' className='wheel-and-hamster mt-36 relative'>
+          <div className='wheel'></div>
+          <div className='hamster'>
+            <div className='hamster__body'>
+              <div className='hamster__head'>
+                <div className='hamster__ear'></div>
+                <div className='hamster__eye'></div>
+                <div className='hamster__nose'></div>
+              </div>
+              <div className='hamster__limb hamster__limb--fr'></div>
+              <div className='hamster__limb hamster__limb--fl'></div>
+              <div className='hamster__limb hamster__limb--br'></div>
+              <div className='hamster__limb hamster__limb--bl'></div>
+              <div className='hamster__tail'></div>
+            </div>
+          </div>
+          <div className='spoke'></div>
+          <p className='absolute -bottom-14 text-center text-lg font-bold'>CardWise is Working Hard!</p>
+        </div>
       )}
     </div>
   )
