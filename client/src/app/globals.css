@@ -557,11 +557,6 @@ Card
   transform: scale(1.15);
 }
 
-body {
-  background-color: #e0e3e8;
-  font-family: "Rubik", sans-serif;
-}
-
 a,
 a:hover,
 a:focus {
