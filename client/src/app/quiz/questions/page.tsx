@@ -1,10 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import TheButton from "@/app/_components/TheButton";
-import Link from "next/link";
-import React, { useState } from "react";
 import Results from "@/app/_components/Results";
-
+import TheButton from "@/app/_components/TheButton";
+import ProgressBar from "@ramonak/react-progress-bar";
+import Link from "next/link";
+import { Line } from "rc-progress";
+import React, { useState } from "react";
 type QuizData = {
   number: number;
   question: string;
@@ -20,12 +21,18 @@ type IProfileData = {
 };
 const Page = ({ params }: any) => {
   const [globalData, setGlobalData] = useState();
+
   async function getCards(profileData: IProfileData) {
     console.log(profileData);
+    console.log(JSON.stringify(profileData));
     const res = await fetch("/api", {
       method: "POST",
       body: JSON.stringify(profileData),
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "*/*",
+        "Access-Control-Allow-Origin": "*",
+      },
     });
 
     const data = await res.json();
@@ -147,20 +154,29 @@ const Page = ({ params }: any) => {
       setProfileData((prev) => ({ ...prev, creditReason: cur }));
     }
     if (currentQuestion + 1 === 10) {
-      let banks = "";
-      for (let i = 0; i < highlightedChoices.length; i++) {
-        let curBank = quizData[currentQuestion].choices[highlightedChoices[i]];
-        banks.concat(curBank + ",");
-      }
-      banks = banks.substring(0, -2);
-      setProfileData((prev) => ({ ...prev, preferredBanks: banks }));
+      let banksString = highlightedChoices
+        .map((i) => quizData[currentQuestion].choices[i])
+        .join(",");
+      console.log(banksString);
+
+      setProfileData((prev) => {
+        const updatedProfileData = { ...prev, preferredBanks: banksString };
+        // Call getCards with the updated profile data
+        console.log(updatedProfileData);
+        getCards(updatedProfileData);
+        return updatedProfileData;
+      });
     }
     setCurrentQuestion((prev) => prev + 1);
     setHighlightedChoices([]);
   };
   const handleHighlightQuestion = (index: number, currentQuestion: number) => {
     if (currentQuestion === 9) {
-      setHighlightedChoices((prev) => [...prev, index]);
+      if (highlightedChoices.includes(index)) {
+        setHighlightedChoices((prev) => prev.filter((item) => item !== index));
+      } else {
+        setHighlightedChoices((prev) => [...prev, index]);
+      }
       setProfileData((prev) => ({
         ...prev,
         preferredBanks: highlightedChoices.join(","),
@@ -175,11 +191,16 @@ const Page = ({ params }: any) => {
   return (
     <div className="flex flex-col items-center width-full ">
       <div className="w-10/12 flex flex-col items-center">
-        {params.question === "result" ? (
+        {currentQuestion === 10 ? (
           <Results data={globalData} />
         ) : (
           <>
-            <p className="text-neutral-400">Question {currentQuestion + 1}</p>
+            <ProgressBar completed={(currentQuestion + 1) / 10} />
+            <Line
+              percent={(currentQuestion + 1) / 10}
+              strokeWidth={4}
+              strokeColor="#D3D3D3"
+            />
             <div className="flex items-center">
               <h1 className="text-2xl text-center">
                 {quizData[currentQuestion].question}
@@ -208,7 +229,13 @@ const Page = ({ params }: any) => {
               })}
             </div>
             {currentQuestion + 1 === 10 ? (
-              <div className="mt-14" onClick={() => getCards(profileData)}>
+              <div
+                className="mt-14"
+                onClick={() => {
+                  handleNextQuestion();
+                  getCards(profileData);
+                }}
+              >
                 <TheButton>Submit Quiz</TheButton>
               </div>
             ) : (
