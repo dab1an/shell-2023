@@ -491,11 +491,11 @@ Card
   to {
     transform: rotate(-1turn);
   }
-
+}
 .card {
   margin-left: 20px;
   margin-top: 20px;
-  font-family: "Candara", sans-serif;
+  font-family: 'Candara', sans-serif;
   width: 220px;
   overflow: hidden;
   background: #fff;
