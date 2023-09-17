@@ -20,9 +20,14 @@ const cardInfo: cardInfoInterface[] = [
     dsc: "Experience the epitome of dining rewards with the American Express Gold Card. Earn a generous 4% cash back on dining worldwide, from fine restaurants to your favorite local eateries. Additionally, enjoy 4% cash back at U.S. supermarkets and valuable travel benefits. With no foreign transaction fees and a stellar rewards program, this card is a culinary and financial delight.",
   },
   {
+<<<<<<< Updated upstream
     name: "Capital One Venture Rewards Credit Card",
     url: "https://icm.aexp-static.com/Internet/internationalcardshop/en_in/images/cards/Gold_Card.png",
     dsc: "Unlock a world of endless adventures with the Capital One Venture Rewards Credit Card. Earn an impressive 2% cash back on every purchase, providing you with the freedom to choose how you redeem your rewards. Whether it's travel, dining, or everyday expenses, this card offers flexibility and value. Plus, enjoy the simplicity of hassle-free travel with no blackout dates or foreign transaction fees.",
+=======
+    name: 'Capital One Venture Rewards Credit Card',
+    url: 'https://www.forbes.com/advisor/wp-content/uploads/2021/07/ff304640-e963-11eb-a48f-65ac0bb53c5b.png',
+>>>>>>> Stashed changes
   },
   {
     name: "Citi Double Cash Card",

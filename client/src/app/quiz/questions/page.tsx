@@ -168,7 +168,7 @@ const Page = ({ params }: any) => {
   }
   return (
     <div className='flex flex-col items-center width-full '>
-      {isLoading ? (
+      {!isLoading ? (
         <div className='w-10/12 flex flex-col items-center'>
           {currentQuestion === 10 ? (
             <Results data={globalData} />
