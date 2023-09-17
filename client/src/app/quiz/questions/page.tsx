@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+
 "use client";
 import Results from "@/app/_components/Results";
 import TheButton from "@/app/_components/TheButton";
@@ -27,6 +28,7 @@ const Page = ({ params }: any) => {
       question: "Are you currently a student?",
       choices: ["Yes", "No"],
       image: "/undraw1.svg",
+
     },
 
     {
@@ -178,6 +180,7 @@ const Page = ({ params }: any) => {
               />
             </div>
             <div className="flex flex-wrap mt-14 gap-2 justify-center">
+
               {quizData[currentQuestion].choices.map((choice, index) => {
                 return (
                   <div
