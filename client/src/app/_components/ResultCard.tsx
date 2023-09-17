@@ -36,7 +36,7 @@ const ResultCard = (props: resultCardProps) => {
         </p>
       </div>
       <div className="p-6 pt-0">
-        <TheButton disabled>See More</TheButton>
+        <TheButton disabled={true}>See More</TheButton>
       </div>
     </div>
   );
