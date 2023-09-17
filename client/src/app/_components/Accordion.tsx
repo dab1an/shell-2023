@@ -15,7 +15,7 @@ const faqs = [
   {
     id: 3,
     header: "How it's built",
-    text: ``,
+    text: `In crafting this project, we embarked on a journey of innovation and knowledge. Inspired by the Vanguard challenge and our commitment to improving financial futures, we dove into the development process. Leveraging our skills in Next.JS, React.js, and harnessing the capabilities of OpenAI, we designed an AI-driven credit card match. Alongside this, we incorporated TailWind, TypeScript, and LineChain to ensure a seamless and responsive user experience. These technologies were the building blocks of our project, allowing us to create a user-centric and accessible platform. This journey taught us that technology, when harnessed thoughtfully, can be a powerful tool for financial empowerment, underlining the importance of blending technology, education, and AI to address real-world financial needs.`,
   },
   {
     id: 4,
