@@ -2,9 +2,9 @@ import React from "react";
 import TheButton from "./TheButton";
 
 interface resultCardProps {
-  cardName: string;
-  description: string;
-  main: boolean;
+  dataName: string;
+  dataDesc: string;
+  main?: boolean;
 }
 
 const ResultCard = (props: resultCardProps) => {
