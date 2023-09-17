@@ -1,10 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
-
 "use client";
-import Results from "@/app/_components/Results";
 import TheButton from "@/app/_components/TheButton";
 import Link from "next/link";
 import React, { useState } from "react";
+import Results from "@/app/_components/Results";
 
 type QuizData = {
   number: number;
@@ -20,6 +19,19 @@ type IProfileData = {
   preferredBanks: string;
 };
 const Page = ({ params }: any) => {
+  const [globalData, setGlobalData] = useState();
+  async function getCards(profileData: IProfileData) {
+    console.log(profileData);
+    const res = await fetch("/api", {
+      method: "POST",
+      body: JSON.stringify(profileData),
+      headers: { "Content-Type": "application/json" },
+    });
+
+    const data = await res.json();
+    setGlobalData(data);
+    console.log(data);
+  }
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [highlightedChoices, setHighlightedChoices] = useState<number[]>([]);
   const quizData: QuizData[] = [
@@ -28,7 +40,6 @@ const Page = ({ params }: any) => {
       question: "Are you currently a student?",
       choices: ["Yes", "No"],
       image: "/undraw1.svg",
-
     },
 
     {
@@ -165,7 +176,7 @@ const Page = ({ params }: any) => {
     <div className="flex flex-col items-center width-full ">
       <div className="w-10/12 flex flex-col items-center">
         {params.question === "result" ? (
-          <Results />
+          <Results data={globalData} />
         ) : (
           <>
             <p className="text-neutral-400">Question {currentQuestion + 1}</p>
@@ -180,7 +191,6 @@ const Page = ({ params }: any) => {
               />
             </div>
             <div className="flex flex-wrap mt-14 gap-2 justify-center">
-
               {quizData[currentQuestion].choices.map((choice, index) => {
                 return (
                   <div
@@ -198,7 +208,11 @@ const Page = ({ params }: any) => {
               })}
             </div>
             {currentQuestion + 1 === 10 ? (
-              <Link href={`/quiz/result`} className="mt-14">
+              <Link
+                href={`/quiz/result`}
+                className="mt-14"
+                onClick={() => getCards(profileData)}
+              >
                 <TheButton>Submit Quiz</TheButton>
               </Link>
             ) : (
