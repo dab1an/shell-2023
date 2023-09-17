@@ -15,19 +15,15 @@ const ResultCard = (props: resultCardProps) => {
         props.main ? "mb-16" : "justify-end"
       }`}
     >
-      <div className="relative mx-4 -mt-6 h-40 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40 bg-gradient-to-r from-blue-500 to-blue-600 border border-gray-500">
+      <div className="absolute -top-8 mx-4 -mt-6 h-40 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40 bg-gradient-to-r from-blue-500 to-blue-600 border border-gray-500">
         <img src={props.cardImg} alt="" className="w-full h-full" />
       </div>
-      <div className="p-6">
+      <div className="p-6 mt-24">
         <h5 className="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased min-h-[60px]">
           {props.dataName}
         </h5>
         <p className="block font-sans font-light leading-relaxed text-inherit antialiased text-sm">
-          The Chase Freedom Unlimited is a great option for you. It offers 1.5%
-          cash back on all purchases, which is perfect for your interest in cash
-          back. Additionally, it has no annual fee and a low intro APR. With
-          this card, you can earn cash back on your travel and grocery
-          purchases.
+          {props.dataDesc}
         </p>
       </div>
       <div className="p-6 pt-0">

@@ -1,10 +1,10 @@
 import React from "react";
 import AboutCard from "../_components/AboutCard";
-
+import Accordion from "../_components/Accordion";
 const page = () => {
   return (
-    <div className="flex justify-center p-5 bg-neutral-200 h-screen">
-      <div className="w-[70%] flex p-4 flex-col gap-4">
+    <div className="flex justify-center p-5 bg-neutral-200">
+      <div className="w-[70%] flex p-10 flex-col gap-5">
         <div>
           <h1 className="text-4xl font-bold">About Us</h1>
           <p className="text-md pt-2 text-lg">
@@ -14,7 +14,7 @@ const page = () => {
           </p>
         </div>
         <h1 className="text-2xl font-bold">Meet our team!</h1>
-        <div className="flex gap-2">
+        <div className="flex gap-4 mb-3">
           <AboutCard
             name="Dabian Garnica"
             role="Backend"
@@ -43,7 +43,9 @@ const page = () => {
             gitUrl="https://github.com/02danieljonas"
             linkedInUrl="https://www.linkedin.com/in/02danieljonas/"
           />
-        </div>
+        </div>{" "}
+        <h1 className="text-2xl font-bold">More about our project</h1>
+        <Accordion />
       </div>
     </div>
   );

@@ -25,10 +25,10 @@ const AboutCard = (props: aboutCardProps) => {
 
         <div className="flex items-center justify-center gap-3">
           <a href={props.gitUrl} target="_blank">
-            <BsGithub size={30} />
+            <BsGithub size={30} className="hover:text-green-500" />
           </a>
           <a href={props.linkedInUrl} target="_blank">
-            <BsLinkedin size={28} />
+            <BsLinkedin size={28} className="hover:text-green-500" />
           </a>
         </div>
       </div>
