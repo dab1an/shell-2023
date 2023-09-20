@@ -4,7 +4,7 @@ import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 const Header = () => {
   return (
-    <div className='sticky py-5 top-0 bg-[#dedede] flex w-full justify-center items-center z-10 backdrop-filter backdrop-blur bg-opacity-80'>
+    <div className='sticky py-5 top-0 bg-[#e6e6e657] flex w-full justify-center items-center z-10 backdrop-filter backdrop-blur bg-opacity-80 '>
       <div className='w-10/12 flex justify-between items-center'>
         <Link className='flex items-center gap-1 text-xl' href={'/'}>
           <img src={'/CreditWise.png'} alt='' className='w-12' />

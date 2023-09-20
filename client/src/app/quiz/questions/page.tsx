@@ -197,7 +197,6 @@ const Page = ({ params }: any) => {
                   className='mt-14'
                   onClick={() => {
                     handleNextQuestion()
-                    getCards(profileData)
                   }}
                 >
                   <TheButton>Submit Quiz</TheButton>

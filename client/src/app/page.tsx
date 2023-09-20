@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { FaRegCreditCard } from 'react-icons/Fa'
 import { BsRobot } from 'react-icons/bs'
+import { FaRegCreditCard } from 'react-icons/fa'
 import { HiOutlineClipboardList } from 'react-icons/hi'
 import image1 from '../public/Roblox.png'
 import Header from './_components/Header'
@@ -10,7 +10,7 @@ import ThreeCards from './_components/ThreeCards'
 
 export default function Home() {
   return (
-    <main className='flex flex-col w-full bg-green-500 items-center'>
+    <main className='flex flex-col w-full bg-green-500 items-center '>
       <div className='flex items-center justify-between w-10/12 py-28 relative'>
         <div className='w-6/12'>
           <h1 className='text-4xl pb-5 font-bold'>Let AI Find a Credit Card Tailored to Your Needs.</h1>
@@ -29,7 +29,7 @@ export default function Home() {
           <div className='mt-16'>
             <h1 className='text-3xl text-center mb-4 font-bold'> The Process </h1>
           </div>
-          <div className='flex items-center justify-between w-full'>
+          <div className='flex items-center justify-between w-full '>
             <div className='flex flex-col items-center'>
               <HiOutlineClipboardList size={50} />
               <h1 className='font-bold text-lg'>Complete the Quiz</h1>
