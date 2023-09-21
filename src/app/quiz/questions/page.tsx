@@ -175,7 +175,7 @@ const Page = ({ params }: any) => {
             <>
               <div className='flex items-center mt-8'>
                 <h1 className='text-2xl text-center'>{quizData[currentQuestion].question}</h1>
-                <img src={quizData[currentQuestion].image} alt='' className='w-80 max-h-64' />
+                <img src={quizData[currentQuestion].image} alt='' className='w-80 max-h-64' loading='lazy' />
               </div>
               <div className='flex flex-wrap mt-14 gap-2 justify-center'>
                 {quizData[currentQuestion].choices.map((choice, index) => {

@@ -7,7 +7,7 @@ const Header = () => {
     <div className='sticky py-5 top-0 bg-[#e6e6e657] flex w-full justify-center items-center z-10 backdrop-filter backdrop-blur bg-opacity-80 '>
       <div className='w-10/12 flex justify-between items-center'>
         <Link className='flex items-center gap-1 text-xl' href={'/'}>
-          <img src={'/CreditWise.png'} alt='' className='w-12' />
+          <img src={'/CreditWise.png'} alt='' className='w-12' loading='lazy' />
           <h2 className='text-2xl font-bold transition duration-200 ease-in-out pb-[2px]'>CardWise.ai</h2>
         </Link>
         <div className=' flex gap-8'>

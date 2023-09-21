@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from 'next/image'
 import Link from 'next/link'
 import { BsRobot } from 'react-icons/bs'
@@ -21,7 +22,7 @@ export default function Home() {
         </div>
 
         <div className='w-6/12'>
-          <img src='/ThreeCards.png' alt='' />
+          <img src='/ThreeCards.png' alt='' loading='lazy' />
         </div>
       </div>
       <div className='bg-neutral-200 w-full flex justify-center pb-6'>
