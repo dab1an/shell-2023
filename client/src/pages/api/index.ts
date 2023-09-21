@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getCardRecommendation } from "../../app/server/langchain";
+import { getCardRecommendation } from "@/server/langchain";
 import { z } from "zod";
 import { cardRecommendationBody } from "../../schemas/cardRecommendationSchema";
 
@@ -14,6 +14,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     let body = cardRecommendationBody.parse(req.body);
 
     const result = await getCardRecommendation(body);
+    // console.log(result);
     return res.status(200).json(result);
   } catch (e) {
     if (e instanceof z.ZodError) {

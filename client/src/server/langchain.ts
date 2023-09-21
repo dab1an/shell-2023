@@ -5,7 +5,7 @@ import { PromptTemplate } from "langchain/prompts";
 import { JsonOutputFunctionsParser } from "langchain/output_parsers";
 import { CardRecommendationBody } from "../schemas/cardRecommendationSchema";
 
-const TEMPLATE = `Your job is to recommend 3 credit cards to users based on their responses to a questionnaire. It is extremely important that you pay close attention to the reason the person is trying to get the credit card and their credit score, as a poor credit score could mean they need a card that is meant for rebuilding credit. It is essential that you abide by at least one of the users bank preferences. Make it so that the 3 credit cards are from different banks. In the description, write about the benefits the card provides as well as why that card is a good fit for the user, include the percentage of cash back if possible as well.
+const TEMPLATE = `Your job is to recommend 3 credit cards to users based on their responses to a questionnaire. 
 
 User is a student: {isStudent}
 User credit score: {creditScore}
@@ -19,32 +19,20 @@ const model = new ChatOpenAI({
 });
 
 const schema = z.object({
-  creditCardName1: z
-    .string()
-    .describe("Name of first credit card recommended to user"),
-  creditCardDescription1: z
-    .string()
-    .describe(
-      "Description of first credit card recommended to user, include the cashback percentage, and explain the reason this card applies to this user"
-    ),
-
-  creditCardName2: z
-    .string()
-    .describe("Name of second credit card recommended to user"),
-  creditCardDescription2: z
-    .string()
-    .describe(
-      "Description of second credit card recommended to user, include the cashback percentage, and explain the reason this card applies to this user"
-    ),
-
-  creditCardName3: z
-    .string()
-    .describe("Name of third credit card recommended to user"),
-  creditCardDescription3: z
-    .string()
-    .describe(
-      "Description of third credit card recommended to user,include the cashback percentage, and explain the reason this card applies to this user"
-    ),
+  data: z
+    .object({
+      creditCardName: z
+        .string()
+        .describe("Name of credit card recommended to user"),
+      creditCardDescription: z
+        .string()
+        .describe(
+          "Description of credit card recommended to user, include the cashback percentage, and explain the reason this card applies to this user"
+        ),
+    })
+    .array()
+    .length(3)
+    .describe("Array giving information on the credit cards"),
 });
 
 const functionCallingModel = model.bind({
@@ -57,6 +45,8 @@ const functionCallingModel = model.bind({
   ],
   function_call: { name: "output_formatter" },
 });
+
+console.log(zodToJsonSchema(schema));
 
 const prompt = PromptTemplate.fromTemplate(TEMPLATE);
 
